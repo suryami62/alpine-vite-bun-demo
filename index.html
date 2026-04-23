@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpine.js + Vite App</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Alpine.js + Vite Demo</h1>
+    
+    <div x-data="counter" class="component">
+      <h2>Counter</h2>
+      <p class="count">Count: <span x-text="count"></span></p>
+      <div class="buttons">
+        <button @click="decrement" class="btn btn-secondary">-</button>
+        <button @click="reset" class="btn btn-warning">Reset</button>
+        <button @click="increment" class="btn btn-primary">+</button>
+      </div>
+    </div>
+
+    <div x-data="toggle" class="component">
+      <h2>Toggle</h2>
+      <button @click="toggle" class="btn btn-toggle" :class="{ 'active': isOpen }">
+        Toggle Content
+      </button>
+      <div x-show="isOpen" x-transition class="toggle-content">
+        <p>This content is toggled! 🎉</p>
+      </div>
+    </div>
+
+    <div x-data="list" class="component">
+      <h2>Dynamic List</h2>
+      <div class="list-input">
+        <input type="text" x-model="newItem" @keydown.enter="addItem" placeholder="Enter item and press Enter">
+        <button @click="addItem" class="btn btn-primary">Add</button>
+        <button @click="sortItems" class="btn btn-secondary">Sort A-Z</button>
+      </div>
+      <ul class="item-list">
+        <template x-for="(item, index) in items" :key="index">
+          <li>
+            <span x-text="item"></span>
+            <button @click="removeItem(index)" class="btn btn-danger btn-small">Remove</button>
+          </li>
+        </template>
+      </ul>
+      <p x-show="items.length === 0" class="empty-message">No items yet. Add some!</p>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
